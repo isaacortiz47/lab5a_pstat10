@@ -1,0 +1,27 @@
+---
+title: "Pstat 10 lab5a and 5b"
+author: "Isaac"
+date:"April 29,2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(datasets)
+data('faithful')
+```
+
+Waiting time between eruptions and the duration of the eruption for the Old Faithful geyser in Yellowstone National Park, Wyoming, USA
+
+```{r}
+head(faithful,n=5)
+```
+
+```{r}
+hist(faithful$eruption,xlab="Duration of the Eruptions",ylab = "Frequency",col="RED",border="BLACK",main="Histogram of Duration of Eruptions",breaks=10)
+```
+
+The overall shape of the distribution is bimodal.

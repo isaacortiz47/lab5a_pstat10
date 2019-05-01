@@ -21,7 +21,46 @@ head(faithful,n=5)
 ```
 
 ```{r}
-hist(faithful$eruption,xlab="Duration of the Eruptions",ylab = "Frequency",col="RED",border="BLACK",main="Histogram of Duration of Eruptions",breaks=10)
+hist(faithful$eruption,xlab="Duration of the Eruptions(Minutes)",ylab = "Frequency",col="RED",border="BLACK",main="Histogram of Duration of Eruptions",breaks=15)
 ```
 
-The overall shape of the distribution is bimodal.
+The overall shape of the distribution is bimodal.The duration of most eruptions either around 1 minute or around 4.5 minutes. There is an outlier with one one or a few eruptions lasting longer than 5 minutes.
+```{r}
+min(faithful$eruptions)
+max(faithful$eruptions)
+median(faithful$eruptions)
+
+```
+Looking at the waiting time between eruptions, I will create a histogram to analyze the distribution of the waiting time between eruptions and decide whether there is a lot or a little variance.
+```{r}
+hist(faithful$waiting,main=toupper("histogram of waiting times between eruptions"),xlab="Waiting Times(Minutes)",ylab="Frequency",col="YELLOW",breaks=20)
+```
+The histogram of waiting times between eruptions shows a bimodal distribution in which the prominant waiting time between eruptions was around 53 minutes or around 76 minutes.
+```{r}
+plot(faithful)
+
+```
+```{r}
+shortduration<-subset(faithful,eruptions<3,select=c(eruptions))
+boxplot(shortduration,horizontal = TRUE,col="Green",main="Box Plot for Eruptions less than 3 minutes",xlab="Minutes")
+```
+```{r}
+mean(shortduration$eruptions)
+sd(shortduration$eruptions)
+median(shortduration$eruptions)
+
+```
+The average time of Eruptions under 3 minutes was 2.03 minutes.The standard deviation was 0.26 or around 15 seconds. Lastly the median was almost 1.983 minutes.
+
+```{r}
+longduration<-subset(faithful,eruptions>=3,select=c(eruptions))
+boxplot(longduration,horizontal = TRUE,col="Blue",main="Box Plot for Eruptions greater than or equal to 3 minutes",xlab="Minutes")
+```
+```{r}
+mean(longduration$eruptions)
+sd(longduration$eruptions)
+median(longduration$eruptions)
+```
+The average time for eruptions over or equal to 3 minutes was 4.29 minutes. The standard deviation was 0.41 minutes or 25 seconds. The median was 4.33 minutes.
+
+Based on these summary statistics, if I were to arrive at Old Faithful after an eruption of less than 3 minutes then I would expect to wait 55 minutes for the next eruption to occur. Whereas if i were to arrive after an eruption of greater or equal to 3 minutes then I would expect to wait around 80 minutes for the next eruption to occur. Therefore, I would not expect to wait longer for the next eruption if I arrive at an eruption that lasted less than 3 minutes than if I were to arrive after an eruption that lasted longer than 3 minutes.
